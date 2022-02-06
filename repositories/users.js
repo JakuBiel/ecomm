@@ -16,7 +16,7 @@ class UsersRepository {
 		}
 	}
 
-	//GETALL
+	//GET_ALL
 	async getAll() {
 		return JSON.parse(
 			await fs.promises.readFile(this.filename, {
@@ -35,7 +35,7 @@ class UsersRepository {
 		await this.writeALL(records);
 	}
 
-	//WRITEALL
+	//WRITE_ALL
 	async writeALL(records) {
 		await fs.promises.writeFile(
 			this.filename,
@@ -43,12 +43,12 @@ class UsersRepository {
 		);
 	}
 
-	//RANDOMID
+	//RANDOM_ID
 	randomId() {
 		return crypto.randomBytes(4).toString("hex");
 	}
 
-	//GETONE
+	//GET_ONE
 	async getOne(id) {
 		const records = await this.getAll();
 		return records.find((record) => record.id === id);
@@ -75,7 +75,7 @@ class UsersRepository {
 		await this.writeALL(records);
 	}
 
-	//GETONEBY
+	//GET_ONE_BY
 	async getOneBy(filters) {
 		const records = await this.getAll();
 
@@ -94,11 +94,4 @@ class UsersRepository {
 	}
 }
 
-const test = async () => {
-	const repo = new UsersRepository("users.json");
-
-	const user = await repo.getOneBy({ pass: "pas" });
-	console.log(user);
-};
-
-test();
+module.exports = new UsersRepository("users.json");
