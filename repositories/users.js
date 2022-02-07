@@ -33,6 +33,8 @@ class UsersRepository {
 		records.push(attrs);
 
 		await this.writeALL(records);
+
+		return attrs;
 	}
 
 	//WRITE_ALL
